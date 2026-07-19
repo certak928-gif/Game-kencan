@@ -1,0 +1,230 @@
+# Game-kencan
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Game Kencan</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+    font-family:Arial,sans-serif;
+    background:linear-gradient(135deg,#ffb6d5,#ffe6f0);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+.game{
+    width:380px;
+    background:#fff;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,.25);
+}
+.header{
+    background:#ff5c93;
+    color:white;
+    text-align:center;
+    padding:15px;
+    font-size:24px;
+}
+.character{
+    height:320px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#ffd8e8;
+    font-size:120px;
+}
+.dialog{
+    padding:20px;
+}
+#name{
+    color:#ff4081;
+    font-size:24px;
+    font-weight:bold;
+}
+#text{
+    margin:15px 0;
+    min-height:70px;
+}
+button{
+    width:100%;
+    padding:12px;
+    margin-top:8px;
+    border:none;
+    border-radius:10px;
+    background:#ff5c93;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+button:hover{
+    background:#e8437b;
+}
+.bar{
+    width:100%;
+    height:18px;
+    background:#ddd;
+    border-radius:10px;
+    overflow:hidden;
+    margin:10px 0;
+}
+.fill{
+    height:100%;
+    width:0%;
+    background:#ff4081;
+}
+</style>
+</head>
+<body>
+
+<div class="game">
+
+<div class="header">
+💖 Game Kencan
+</div>
+
+<div class="character" id="face">
+😊
+</div>
+
+<div class="dialog">
+
+<div id="name">Alya</div>
+
+<div class="bar">
+<div class="fill" id="loveBar"></div>
+</div>
+
+<p>Hubungan: <span id="love">0</span>/100</p>
+
+<p id="text">
+Hai... Aku Alya.
+Senang akhirnya bisa bertemu denganmu.
+</p>
+
+<div id="choices">
+
+<button onclick="pilih(1)">
+🌹 Kamu cantik sekali.
+</button>
+
+<button onclick="pilih(2)">
+📚 Apa hobimu?
+</button>
+
+<button onclick="pilih(3)">
+😂 Ceritakan sesuatu yang lucu.
+</button>
+
+<button onclick="pilih(4)">
+👋 Aku harus pulang.
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+let love=0;
+
+function update(){
+
+document.getElementById("love").innerHTML=love;
+
+document.getElementById("loveBar").style.width=love+"%";
+
+if(love>=100){
+
+document.getElementById("text").innerHTML=
+"💕 Selamat! Alya menyukaimu.<br><br>ENDING BAIK";
+
+document.getElementById("choices").innerHTML=
+"<button onclick='restart()'>Main Lagi</button>";
+
+document.getElementById("face").innerHTML="🥰";
+
+}
+
+}
+
+function pilih(x){
+
+let t=document.getElementById("text");
+let f=document.getElementById("face");
+
+switch(x){
+
+case 1:
+
+love+=25;
+t.innerHTML="Hehe... Makasih. Aku jadi malu 😊";
+f.innerHTML="😊";
+break;
+
+case 2:
+
+love+=20;
+t.innerHTML="Aku suka membaca novel, bermain game, dan jalan sore.";
+f.innerHTML="😄";
+break;
+
+case 3:
+
+love+=30;
+t.innerHTML="Hahaha! Kamu ternyata lucu juga.";
+f.innerHTML="😂";
+break;
+
+case 4:
+
+love-=20;
+t.innerHTML="Yah... baru juga mulai ngobrol.";
+f.innerHTML="😢";
+break;
+
+}
+
+if(love<0)love=0;
+if(love>100)love=100;
+
+update();
+
+}
+
+function restart(){
+
+love=0;
+
+document.getElementById("choices").innerHTML=`
+
+<button onclick="pilih(1)">🌹 Kamu cantik sekali.</button>
+
+<button onclick="pilih(2)">📚 Apa hobimu?</button>
+
+<button onclick="pilih(3)">😂 Ceritakan sesuatu yang lucu.</button>
+
+<button onclick="pilih(4)">👋 Aku harus pulang.</button>
+
+`;
+
+document.getElementById("face").innerHTML="😊";
+
+document.getElementById("text").innerHTML=
+"Hai... Aku Alya. Senang akhirnya bisa bertemu denganmu.";
+
+update();
+
+}
+
+update();
+
+</script>
+
+</body>
+</html>
